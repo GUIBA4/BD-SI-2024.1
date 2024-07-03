@@ -5,5 +5,6 @@ Equipe:
 - Gabriel Albertin <gav>
 - Maria Bezerra <mbma>
 - Ícaro Amazonas <ias6>
+
 Descrição do projeto:
 ...
