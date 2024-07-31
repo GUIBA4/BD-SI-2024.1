@@ -67,10 +67,12 @@ Os requisitos da modelagem foram atendidos da seguinte forma:
 - __Multivalorado:__ Categorias
 - __Discriminador em Relacionamento:__ Data da Rodada
 
-#### __Relacionamentos__ (9)
+#### __Relacionamentos__ (11)
+- __Relacionamento 1:1:__ Aposta - TransaçãoInterna
 - __Relacionamento 1:N:__ Carteira - Transação
 - __Relacionamento N:M:__ Usuário - Rodada
 - __Relacionamento parcial-total:__ Carteira - Transação
+- __Relacionamento parcial-parcial:__ Usuário - Rodada
 - __Relacionamento Unário ou Auto Relacionamento:__ Usuário - Usuário (Indica)
 - __Relacionamento Binário:__ Carteira - Transação
 - __Relacionamento N-ário:__  Usuário - Carteira - Bônus
@@ -78,7 +80,7 @@ Os requisitos da modelagem foram atendidos da seguinte forma:
 - __Entidade Associativa:__ Aposta
 - __Herança:__ Transação (Interna/Externa)
 
-Totalizando 12 dos 14 conceitos estudados na disciplina.
+Totalizando 14 dos conceitos estudados na disciplina.
 
 
 ## 👍 Regras de Negócio
