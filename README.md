@@ -43,10 +43,10 @@ Todas as apostas feitas por um usuário resultam em uma transação interna na c
 
 #### 2. Relacionamentos
     1. Indica (Usuário - Usuário): Um usuário (padrinho) pode indicar vários novos usuários (afiliados). 
-    Um usuário pode não indicar ninguém, mas pode ser indicado por um padrinho (1:N, parcial/total).
+    Um usuário pode não indicar ninguém, mas pode ser indicado por um padrinho (1:N, total/parcial).
 
     2. Contém (Usuário - Bônus - Carteira): Todo carteira deve pertencer a um usuário. 
-    Todo bônus deve pertencer a um usuário. Um usuário possui um bônus em uma carteira (1:1:1, parcial/obrigatório/obrigatório).
+    Todo bônus deve pertencer a um usuário. Um usuário possui um bônus em uma carteira (1:1:1, parcial/total/total).
 
     3. Possui (Carteira - Transação): Uma carteira pode ter múltiplas transações. 
     Toda transação deve estar associada a uma carteira (1:N, parcial/total).
@@ -55,7 +55,7 @@ Todas as apostas feitas por um usuário resultam em uma transação interna na c
     Um jogo pode ter múltiplas rodadas. Toda rodada deve estar associada a um jogo (1:N, parcial/total).
 
     5. Cria (Aposta - TransaçãoInterna):  Quando uma aposta é realizada por um usuário, existe uma transação interna. 
-    Quando uma rodada é positiva, existe uma transação interna.
+    Quando uma rodada é positiva, existe uma transação interna (1:1,parcial/total).
 
 
 ## 📝 Requisitos da Modelagem
