@@ -42,8 +42,8 @@ Todas as apostas feitas por um usuário resultam em uma transação interna na c
     7. Rodada (Resultado, Data da Rodada, Multiplicador)
 
 #### 2. Relacionamentos
-    1. Indica (Usuário - Usuário): Um usuário (padrinho) pode indicar vários novos usuários (afiliados). 
-    Um usuário pode não indicar ninguém, mas pode ser indicado por um padrinho (1:N, total/parcial).
+    1. Indica (Usuário - Usuário): vários usuários (padrinho) podem indicar vários novos usuários (afiliados). 
+    Um usuário pode não indicar ninguém, mas ao indicar pode ser indicado por um padrinho (N:N, parcial/parcial).
 
     2. Contém (Usuário - Bônus - Carteira): Todo carteira deve pertencer a um usuário. 
     Todo bônus deve pertencer a um usuário. Um usuário possui um bônus em uma carteira (1:1:1, parcial/total/total).
@@ -78,7 +78,7 @@ Os requisitos da modelagem foram atendidos da seguinte forma:
 - __Relacionamento N-ário:__  Usuário - Carteira - Bônus
 - __Entidade Fraca:__ Rodada
 - __Entidade Associativa:__ Aposta
-- __Herança:__ Transação (Interna/Externa)
+- __Herança:__ Transação Disjunta Total (Interna/Externa)
 
 Totalizando 14 dos conceitos estudados na disciplina.
 
