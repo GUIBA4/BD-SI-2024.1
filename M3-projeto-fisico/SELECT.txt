@@ -1,0 +1,43 @@
+-- consulta usando where e order by
+-- retorne as transações do tipo 'interna' com valor acima de 200.00 ordenadas pelo valor em ordem decrescente
+SELECT id, tipo, valor, cpf
+FROM transacao
+WHERE tipo = 'INTERNA' AND valor > 200
+ORDER BY valor DESC;
+
+-- consulta usando count/sum e group by
+-- retorne a quantidade de apostas e a soma dos valores totais apostados por cada usuario do sistema
+
+SELECT cpf, COUNT(*) AS total_apostas, SUM(valor) AS total_valor_apostado
+FROM aposta
+GROUP BY cpf;
+
+-- consulta usando having e limit (rownum)
+-- retorne os usuarios que realizaram mais de uma aposta, limitando o resultado aos 2 primeiros registros
+
+SELECT cpf, COUNT(*) AS total_apostas
+FROM aposta
+GROUP BY cpf
+HAVING COUNT(*) > 1
+ORDER BY COUNT(*) DESC
+FETCH FIRST 2 ROWS ONLY;
+
+-- consulta usando join
+-- retorne as informações sobre as apostas realizadas pelos usuários, incluindo os dados do jogo
+SELECT u.nome, j.nome AS jogo_nome, a.valor, a.data
+FROM aposta a
+JOIN rodada r ON a.rodada_id = r.id
+JOIN jogo j ON r.id = j.id
+JOIN usuario u ON a.cpf = u.cpf;
+
+-- consulta com subconsulta
+-- retorne os nomes dos usuarios que realizaram apostas com valor superior a media de todas as apostas
+SELECT nome 
+FROM usuario
+WHERE cpf IN (
+    SELECT cpf 
+    FROM aposta 
+    WHERE valor > (SELECT AVG(valor) FROM aposta)
+);
+
+

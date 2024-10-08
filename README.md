@@ -33,29 +33,24 @@ Todas as apostas feitas por um usuário resultam em uma transação interna na c
 
 #### 1. Entidades e Atributos
     1. Jogo (ID, Nome, Categorias, Data de Criação)
-    2. Usuário (CPF, E-mail, Nome)
-    3. Carteira (ID, Saldo)
-    4. Bônus (ID, Valor)
-    5. Transação (ID, Tipo, Valor), TransaçãoInterna (Internal_ID) e 
+    2. Usuário (CPF, E-mail, Nome, Saldo, Bônus)
+    3. Transação (ID, Tipo, Valor), TransaçãoInterna (Internal_ID) e 
     TransaçãoExterna (External_ID, Dados bancários (Código do Banco, Conta, Agencia e CPF)
-    6. Aposta (Valor, Data da Aposta)
-    7. Rodada (Resultado, Data da Rodada, Multiplicador)
+    4. Aposta (Valor, Data da Aposta, Cashout)
+    5. Rodada (Resultado, Data da Rodada, Multiplicador)
 
 #### 2. Relacionamentos
-    1. Indica (Usuário - Usuário): vários usuários (padrinho) podem indicar vários novos usuários (afiliados). 
-    Um usuário pode não indicar ninguém, mas ao indicar pode ser indicado por um padrinho (N:N, parcial/parcial).
+    1. Possui (Usuário - Transação): Um usuário pode ter múltiplas transações. 
+    Toda transação deve estar associada a um usuário (1:N, parcial/total).
+    
+    2. Cria (Aposta - TransaçãoInterna):  Quando uma aposta é realizada por um usuário, existe uma transação interna (1:1,parcial/total). 
 
-    2. Contém (Usuário - Bônus - Carteira): Todo carteira deve pertencer a um usuário. 
-    Todo bônus deve pertencer a um usuário. Um usuário possui um bônus em uma carteira (1:1:1, parcial/total/total).
-
-    3. Possui (Carteira - Transação): Uma carteira pode ter múltiplas transações. 
-    Toda transação deve estar associada a uma carteira (1:N, parcial/total).
+    3. Indica (Usuário - Usuário): Um usuário (padrinho) podem indicar vários novos usuários (afiliados). 
+    Um usuário pode ou não indicar alguém, mas ao indicar torna-se um padrinho (1:N, parcial/parcial).
 
     4. Tem (Jogo - Rodada): Uma rodada pertence a um jogo. 
     Um jogo pode ter múltiplas rodadas. Toda rodada deve estar associada a um jogo (1:N, parcial/total).
-
-    5. Cria (Aposta - TransaçãoInterna):  Quando uma aposta é realizada por um usuário, existe uma transação interna. 
-    Quando uma rodada é positiva, existe uma transação interna (1:1,parcial/total).
+    (1:1,parcial/total).
 
 
 ## 📝 Requisitos da Modelagem
@@ -67,20 +62,18 @@ Os requisitos da modelagem foram atendidos da seguinte forma:
 - __Multivalorado:__ Categorias
 - __Discriminador em Relacionamento:__ Data da Rodada
 
-#### __Relacionamentos__ (11)
+#### __Relacionamentos__ (9)
 - __Relacionamento 1:1:__ Aposta - TransaçãoInterna
-- __Relacionamento 1:N:__ Carteira - Transação
+- __Relacionamento 1:N:__ Usuário- Transação
 - __Relacionamento N:M:__ Usuário - Rodada
-- __Relacionamento parcial-total:__ Carteira - Transação
-- __Relacionamento parcial-parcial:__ Usuário - Rodada
+- __Relacionamento parcial-total:__ Usuáio - Transação
+- __Relacionamento parcial-parcial:__ Usuário - Aposta - Rodada
 - __Relacionamento Unário ou Auto Relacionamento:__ Usuário - Usuário (Indica)
-- __Relacionamento Binário:__ Carteira - Transação
-- __Relacionamento N-ário:__  Usuário - Carteira - Bônus
 - __Entidade Fraca:__ Rodada
 - __Entidade Associativa:__ Aposta
-- __Herança:__ Transação Disjunta Total (Interna/Externa)
+- __Herança:__ Transação Disjunta Parcial (Interna/Externa)
 
-Totalizando 14 dos conceitos estudados na disciplina.
+Totalizando 12 dos 14 conceitos estudados na disciplina.
 
 
 ## 👍 Regras de Negócio
@@ -89,7 +82,7 @@ Totalizando 14 dos conceitos estudados na disciplina.
 
 ✅ A gestão da carteira permite que o usuário visualize o saldo da sua carteira.
 
-✅ O bônus depende que o usuário entre na plataforma.
+✅ O bônus é um valor que pode ser apostado.
 
 ✅ A plataforma pode criar e gerir jogos por meio de nomes, categorias, data de criação e id.
 

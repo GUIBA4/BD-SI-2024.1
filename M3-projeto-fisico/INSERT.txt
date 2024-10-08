@@ -1,0 +1,385 @@
+-- inserindo usuários
+INSERT INTO usuario VALUES (
+    '10499930479',
+    'tavora@cin.ufpe.br',
+    'Lucas Tavora',
+    1200.00,
+    59.00,
+    NULL
+);
+
+INSERT INTO usuario VALUES(
+    '98765432101',
+    'maria@cin.ufpe.com',
+    'Maria Bezerra',
+    500.00,
+    25.00,
+    '10499930479'
+);
+
+INSERT INTO usuario VALUES(
+    '88877766600', 
+    'gabriel@cin.ufpe.com', 
+    'Gabriel Albertin', 
+    2000.00, 
+    100.00, 
+    '98765432101'
+);
+
+INSERT INTO usuario VALUES(
+    '98765432102',
+    'franklin@cin.ufpe.com',
+    'Franklin Amaral',
+    800.00,
+    40.00,
+    '88877766600'
+);
+
+INSERT INTO usuario VALUES(
+    '11122233399', 
+    'guilherme@cin.ufpe.com', 
+    'Guilherme', 
+    1500.00, 
+    75.00, 
+    '98765432101'
+);
+
+-- inserindo jogos
+
+INSERT INTO jogo (id, nome, data_criacao) VALUES(
+    1,
+    'Tigrinho',
+    TO_DATE('2024-03-03', 'YYYY-MM-DD')
+);
+    
+INSERT INTO jogo (id, nome, data_criacao) VALUES(
+    2,
+    'Roleta',
+    TO_DATE('2023-12-10', 'YYYY-MM-DD')
+);
+
+INSERT INTO jogo (id, nome, data_criacao) VALUES(
+    3,
+    'BlackJack - 21',
+    TO_DATE('2024-02-25', 'YYYY-MM-DD')
+);
+
+INSERT INTO jogo (id, nome, data_criacao) VALUES(
+    4,
+    'Aviaozinho',
+    TO_DATE('2024-10-10', 'YYYY-MM-DD')
+);
+
+INSERT INTO jogo (id, nome, data_criacao) VALUES(
+    5,
+    'Bingo',
+    TO_DATE('2024-09-26', 'YYYY-MM-DD')
+);
+
+-- inserindo categorias
+
+INSERT INTO categoria VALUES (
+    1,
+    'Azar'
+);
+
+INSERT INTO categoria VALUES (
+    2,
+    'Cassino'
+);
+
+INSERT INTO categoria VALUES (
+    3,
+    'Crash Games'
+);
+
+INSERT INTO categoria VALUES (
+    4,
+    'Cartas'
+);
+
+INSERT INTO categoria VALUES (
+    5,
+    'Digital'
+);
+
+-- inserindo rodada
+
+INSERT INTO rodada VALUES (
+    1,
+    TO_DATE('2024-01-01', 'YYYY-MM-DD'),
+    1,
+    1.5
+);
+
+INSERT INTO rodada VALUES (
+    2,
+    TO_DATE('2024-02-05', 'YYYY-MM-DD'),
+    0,
+    3.5
+);
+
+INSERT INTO rodada VALUES (
+    3,
+    TO_DATE('2024-03-10', 'YYYY-MM-DD'),
+    1,
+    2.5
+);
+
+INSERT INTO rodada VALUES (
+    4,
+    TO_DATE('2024-04-15', 'YYYY-MM-DD'),
+    1,
+    1.0
+);
+
+INSERT INTO rodada VALUES (
+    5,
+    TO_DATE('2024-05-20', 'YYYY-MM-DD'),
+    0,
+    1.7
+);
+
+-- inserindo aposta
+
+-- o usuário Lucas Tavora aposta R$100,00 na rodada 1 do jogo Tigrinho
+INSERT INTO aposta VALUES ( 
+    '10499930479', 
+    1, 
+    TO_DATE('2024-02-05', 'YYYY-MM-DD'),
+    100.00, 
+    TO_DATE('2024-02-05', 'YYYY-MM-DD'),
+    150.00
+);
+
+-- Maria Bezerra aposta R$50,00 na rodada 2 do jogo Roleta e realiza um cashout de R$175,00
+INSERT INTO aposta VALUES (
+    '98765432101',
+    2,
+    TO_DATE('2024-02-05', 'YYYY-MM-DD'),
+    50.00,
+    TO_DATE('2024-02-04', 'YYYY-MM-DD'),
+    175.00
+);
+
+-- Gabriel Albertin aposta R$200,00 na rodada 3 do jogo BlackJack - 21
+INSERT INTO aposta VALUES (
+    '88877766600',
+    3, 
+    TO_DATE('2024-03-10', 'YYYY-MM-DD'),
+    200.00,
+    TO_DATE('2024-03-09', 'YYYY-MM-DD'),
+    500.00
+); 
+
+-- Franklin Amaral aposta R$150,00 na rodada 4 do jogo Aviaozinho
+INSERT INTO aposta VALUES (
+    '98765432102',
+    4,
+    TO_DATE('2024-04-15', 'YYYY-MM-DD'),
+    150.00,
+    TO_DATE('2024-04-14', 'YYYY-MM-DD'),
+    150.00
+); 
+
+-- Guilherme aposta R$100,00 na rodada 5 do jogo Bingo
+INSERT INTO aposta VALUES (
+    '11122233399',
+    5,
+    TO_DATE('2024-05-20', 'YYYY-MM-DD'),
+    100.00,
+    TO_DATE('2024-05-19', 'YYYY-MM-DD'),
+    170.00
+);
+
+-- Inserindo apostas adicionais para gerar dados para 3 consulta (halving)
+INSERT INTO aposta VALUES (
+    '10499930479', 
+    2, 
+    TO_DATE('2024-02-05', 'YYYY-MM-DD'),
+    200.00, 
+    TO_DATE('2024-02-06', 'YYYY-MM-DD'),
+    300.00
+);
+
+INSERT INTO aposta VALUES (
+    '98765432101',
+    3,
+    TO_DATE('2024-03-10', 'YYYY-MM-DD'),
+    150.00,
+    TO_DATE('2024-03-11', 'YYYY-MM-DD'),
+    250.00
+);
+
+INSERT INTO aposta VALUES (
+    '98765432101',
+    4,
+    TO_DATE('2024-04-15', 'YYYY-MM-DD'),
+    100.00,
+    TO_DATE('2024-04-16', 'YYYY-MM-DD'),
+    150.00
+);
+
+-- inserindo transação
+
+INSERT INTO transacao VALUES (
+    1,
+    'INTERNA',
+    500.00,
+    '10499930479'
+);
+
+INSERT INTO transacao VALUES (
+    2,
+    'EXTERNA',
+    100.00,
+    '98765432101'
+);
+
+INSERT INTO transacao VALUES (
+    3,
+    'INTERNA',
+    300.00,
+    '88877766600'
+);
+
+INSERT INTO transacao VALUES (
+    4,
+    'EXTERNA',
+    400.00,
+    '98765432102'
+);
+
+INSERT INTO transacao VALUES (
+    5,
+    'INTERNA',
+    800.00,
+    '11122233399'
+);
+
+INSERT INTO transacao VALUES (
+    6,
+    'EXTERNA',
+    250.00,
+    '10499930479'
+);
+
+INSERT INTO transacao VALUES (
+    7,
+    'INTERNA',
+    50.00,
+    '98765432101'
+);
+
+INSERT INTO transacao VALUES (
+    8,
+    'EXTERNA',
+    200.00,
+    '88877766600'
+);
+
+INSERT INTO transacao VALUES (
+    9,
+    'INTERNA',
+    100.00,
+    '98765432102'
+);
+
+INSERT INTO transacao VALUES (
+    10,
+    'EXTERNA',
+    300.00,
+    '11122233399'
+);
+
+-- inserindo transação interna
+INSERT INTO interna VALUES(
+    1,
+    101,
+    '10499930479',
+    1,
+    TO_DATE('2024-02-05', 'YYYY-MM-DD'),
+    500.00
+);
+
+INSERT INTO interna VALUES (
+    3, 
+    102, 
+    '88877766600', 
+    3, 
+    TO_DATE('2024-03-10', 'YYYY-MM-DD'), 
+    300.00
+);
+
+INSERT INTO interna VALUES (
+    5,
+    103,
+    '11122233399',
+    5,
+    TO_DATE('2024-05-20', 'YYYY-MM-DD'),
+    800.00
+);
+
+INSERT INTO interna VALUES (
+    7, 
+    104, 
+    '98765432101', 
+    2, 
+    TO_DATE('2024-02-05', 'YYYY-MM-DD'), 
+    50.00
+);
+
+INSERT INTO interna VALUES (
+    9, 
+    105, 
+    '98765432102',
+    4,
+    TO_DATE('2024-04-15', 'YYYY-MM-DD'),
+    100.00
+);
+
+-- inserindo na tabela externa
+INSERT INTO externa VALUES (
+    2,
+    201,
+    'COD001',
+    '12345-6',
+    '001',
+    '98765432101'
+);
+
+INSERT INTO externa VALUES (
+    4,
+    202,
+    'COD002',
+    '65432-1',
+    '002',
+    '98765432102'
+);
+
+INSERT INTO externa VALUES (
+    6,
+    203,
+    'COD003',
+    '78910-5',
+    '003',
+    '10499930479'
+);
+
+INSERT INTO externa VALUES (
+    8,
+    204,
+    'COD004',
+    '54321-0',
+    '004',
+    '88877766600'
+);
+
+INSERT INTO externa VALUES (
+    10, 
+    205, 
+    'COD005', 
+    '98765-4', 
+    '005', 
+    '11122233399'
+);

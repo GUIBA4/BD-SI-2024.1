@@ -1,0 +1,73 @@
+CREATE TABLE usuario (
+    cpf VARCHAR2(11) PRIMARY KEY,
+    email VARCHAR2(100) UNIQUE NOT NULL,
+    nome VARCHAR2(100) NOT NULL,
+    saldo FLOAT CHECK (saldo >= 0) NOT NULL,
+    bonus FLOAT CHECK (bonus >= 0) NOT NULL,
+    padrinho VARCHAR2(11),
+    FOREIGN KEY (padrinho) REFERENCES usuario(cpf)
+);
+
+CREATE TABLE jogo (
+    id INT PRIMARY KEY,
+    nome VARCHAR2(100) NOT NULL,
+    data_criacao DATE NOT NULL
+);
+
+CREATE TABLE categoria ( 
+    jogo_id INT, 
+    categoria VARCHAR2(50) NOT NULL, 
+    PRIMARY KEY (jogo_id, categoria), 
+    FOREIGN KEY (jogo_id) REFERENCES jogo(id) 
+);
+
+CREATE TABLE rodada (
+    id int,
+    data_rodada date  unique not null,
+    resultado int not null,
+    multiplicador float not null,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) references jogo(id)
+);
+
+CREATE TABLE aposta (
+    cpf VARCHAR2(11) NOT NULL,
+    rodada_id INT NOT NULL,
+    data_rodada DATE NOT NULL,
+    valor FLOAT NOT NULL,
+    data DATE NOT NULL,
+    cashout FLOAT DEFAULT 0,
+    PRIMARY KEY (cpf, rodada_id, data_rodada),
+    FOREIGN KEY (cpf) REFERENCES usuario(cpf),
+    FOREIGN KEY (rodada_id) REFERENCES rodada(id),
+    FOREIGN KEY (data_rodada) REFERENCES rodada(data_rodada)
+);
+
+CREATE TABLE transacao ( 
+    id INT PRIMARY KEY, 
+    tipo VARCHAR2(20) NOT NULL CHECK (tipo IN ('INTERNA', 'EXTERNA')), 
+    valor float, 
+    cpf VARCHAR2(11) REFERENCES usuario(cpf) 
+);
+
+CREATE TABLE interna (
+    id INT,
+    internal_id INT,
+    cpf VARCHAR2(11),
+    rodada_id INT NOT NULL,
+    data_rodada DATE NOT NULL,
+    valor FLOAT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES transacao(id),
+    FOREIGN KEY (cpf, rodada_id, data_rodada) REFERENCES aposta(cpf, rodada_id, data_rodada)
+);
+
+CREATE TABLE externa (
+    id int PRIMARY KEY,
+    external_id int,
+    dados_codigo VARCHAR2(50),
+    dados_conta VARCHAR2(50),
+    dados_agencia VARCHAR2(50),
+    dados_cpf VARCHAR2(11),
+    CONSTRAINT fk_externa_transacao FOREIGN KEY (id) REFERENCES transacao(id)
+);
