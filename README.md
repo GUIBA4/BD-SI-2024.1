@@ -28,6 +28,8 @@ Os usuários podem fazer apostas em rodadas dentro de um jogo. Cada jogo possui 
 
 Todas as apostas feitas por um usuário resultam em uma transação interna na carteira desse usuário. Cada transação é identificada por um ID único. Além das apostas, os usuários podem adicionar ou retirar fundos de suas carteiras através de transações. Cada transação, seja interna ou externa, possui um ID, tipo (crédito ou débito) e valor. As transações externas são realizadas via banco e incluem informações detalhadas como código do banco, número da conta, agência e CPF.
 
+![conceitual](https://github.com/user-attachments/assets/59222e69-bec1-4401-a6f9-c03b6f3b26f8)
+
 
 ## 🪢 Entidades, Atributos e Relacionamentos
 
